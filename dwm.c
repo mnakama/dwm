@@ -245,6 +245,7 @@ static void tile(Monitor *);
 static void centeredmaster(Monitor *);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
+static void togglefullscreen(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void unfocus(Client *c, int setfocus);
@@ -1772,6 +1773,15 @@ setfullscreen(Client *c, int fullscreen)
 		resizeclient(c, c->x, c->y, c->w, c->h);
 		arrange(c->mon);
 	}
+}
+
+void
+togglefullscreen(const Arg *arg)
+{
+	if (!selmon->sel)
+		return;
+	setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
+	//arrange(selmon);
 }
 
 void
