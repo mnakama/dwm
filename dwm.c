@@ -361,14 +361,13 @@ comboview(const Arg *arg) {
 	unsigned newtags = arg->ui & TAGMASK;
 	if (combo) {
 		selmon->tagset[selmon->seltags] |= newtags;
+		focus(NULL);
+		arrange(selmon);
 	} else {
-		selmon->seltags ^= 1;	/*toggle tagset*/
 		combo = 1;
 		if (newtags)
-			selmon->tagset[selmon->seltags] = newtags;
+			view(arg);
 	}
-	focus(NULL);
-	arrange(selmon);
 }
 
 void
@@ -938,10 +937,12 @@ drawbar(Monitor *m)
 		           0, urg & 1 << i);
 		x += w;
 	}
-	w = blw = TEXTW(m->ltsymbol);
 	drw_setscheme(drw, &scheme[SchemeNorm]);
-	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
-	x += w;
+	if (strlen(m->ltsymbol) > 0) { /* draw only non-empty layout symbol */
+		w = blw = TEXTW(m->ltsymbol);
+		drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
+		x += w;
+	}
 	xx = x;
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		w = TEXTW(stext);
