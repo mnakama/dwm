@@ -22,7 +22,7 @@ static const Bool showsystray       = True;     /* False means no systray */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
-static const unsigned int minupdateinterval = 1000 / 120; /* limit amount of move/resize updates to this */
+static const unsigned int minupdateinterval = 1000 / 144; /* limit amount of move/resize updates to this */
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
